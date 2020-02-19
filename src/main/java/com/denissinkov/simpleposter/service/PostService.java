@@ -2,12 +2,15 @@ package com.denissinkov.simpleposter.service;
 
 import com.denissinkov.simpleposter.domain.Post;
 import com.denissinkov.simpleposter.domain.User;
+import com.denissinkov.simpleposter.domain.dto.PostDto;
 import com.denissinkov.simpleposter.repos.PostRepo;
 import com.denissinkov.simpleposter.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityManager;
 
 @Service
 public class PostService {
@@ -20,17 +23,17 @@ public class PostService {
         this.userRepo = userRepo;
     }
 
-    public Page<Post> postList(Pageable pageable, String filter) {
-        if(filter != null && !filter.isEmpty() ) {
-            User author = userRepo.findByUsername(filter);
-            return postRepo.findByAuthor(author, pageable);
+    public Page<PostDto> postList(Pageable pageable, String filterUserName, User user) {
+        if(filterUserName != null && !filterUserName.isEmpty() ) {
+            User author = userRepo.findByUsername(filterUserName);
+            return postRepo.findByAuthor(pageable, author, user);
         }
         else {
-            return postRepo.findAll(pageable);
+            return postRepo.findAll(pageable, user);
         }
     }
 
-    public Page<Post> PostListForUser(Pageable pageable, User currentUser, User author) {
-        return postRepo.findByAuthor(author, pageable);
+    public Page<PostDto> PostListForUser(Pageable pageable, User author, User currentUser) {
+        return postRepo.findByAuthor(pageable, author, currentUser);
     }
 }

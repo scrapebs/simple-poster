@@ -1,9 +1,12 @@
 package com.denissinkov.simpleposter.domain;
 
+import com.denissinkov.simpleposter.domain.util.PostHelper;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "post")
@@ -26,6 +29,14 @@ public class Post {
     @Enumerated(EnumType.STRING)
     private PostStatus status;
 
+    @ManyToMany
+    @JoinTable(
+            name = "post_likes",
+            joinColumns = {@JoinColumn(name = "post_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
+    private Set<User> likes = new HashSet<>();
+
 
     public Post() {
     }
@@ -38,7 +49,7 @@ public class Post {
 
 
     public String getAuthorName() {
-        return author != null ? author.getUsername() : "<none>";
+        return PostHelper.getAuthorName(author);
     }
 
     public Long getId() {
@@ -75,4 +86,11 @@ public class Post {
 
     public void setFilename(String filename) { this.filename = filename; }
 
+    public Set<User> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Set<User> likes) {
+        this.likes = likes;
+    }
 }

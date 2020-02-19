@@ -14,13 +14,23 @@
                 <span>${post.text}</span><br/>
             </div>
 
-            <div class="card-footer text-muted">
-                <a href = "/user-posts/${post.author.id}">${post.authorName}</a>
-                <#if post.author.id == currentUserId>
-                    <a class="btn btn-primary" href = "/user-posts/${post.author.id}?post=${post.id}">
-                        Edit
+            <div class="card-footer text-muted container">
+                <div class="row">
+                    <a class="col align-self-center" href = "/user-posts/${post.author.id}">${post.authorName}</a>
+                    <a class="col align-self-center" href ="/posts/${post.id}/like">
+                        <#if post.meLiked>
+                            <i class="fas fa-heart"></i>
+                        <#else>
+                            <i class="far fa-heart"></i>
+                        </#if>
+                        ${post.likes}
                     </a>
-                </#if>
+                    <#if post.author.id == currentUserId>
+                        <a class="col btn btn-primary" href = "/user-posts/${post.author.id}?post=${post.id}">
+                            Edit
+                        </a>
+                    </#if>
+                </div>
             </div>
 
         </div>
