@@ -7,6 +7,7 @@ import com.denissinkov.simpleposter.domain.dto.PostDto;
 import com.denissinkov.simpleposter.repos.PostRepo;
 import com.denissinkov.simpleposter.repos.UserRepo;
 import com.denissinkov.simpleposter.service.PostService;
+import com.denissinkov.simpleposter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -118,7 +119,7 @@ public class PosterController {
             @RequestParam(required = false) Post post,
             @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        Page<PostDto> page = postService.PostListForUser(pageable, author, currentUser);
+        Page<PostDto> page = postService.postListForUser(pageable, author, currentUser);
 
         model.addAttribute("userChannel", author);
         model.addAttribute("subscriptionsCount", author.getSubscriptions().size());
@@ -156,6 +157,16 @@ public class PosterController {
             }
         }
         return "redirect:/user-posts/" + viewedUser.getId();
+    }
+
+    @PostMapping("/post/{post}/delete")
+    public String deletePost(
+            @AuthenticationPrincipal User user,
+            @PathVariable Post post
+
+    ) {
+        postService.deletePost(user, post);
+        return "redirect:/user-posts/" + user.getId();
     }
 
     @GetMapping("/posts/{post}/like")

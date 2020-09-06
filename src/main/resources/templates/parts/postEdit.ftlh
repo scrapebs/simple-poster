@@ -21,9 +21,17 @@
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
             <input type="hidden" name="id" value="<#if post??>${post.id}</#if>"/>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Post</button>
-            </div>
+            <table>
+                <tr>
+                    <td>
+                        <button type="submit" class="btn btn-primary">Post</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalPostDelete">Delete</button>
+                    </td>
+                </tr>
+            </table>
+
         </form>
     </div>
 </div>

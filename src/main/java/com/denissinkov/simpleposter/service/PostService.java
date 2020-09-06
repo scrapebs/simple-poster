@@ -33,7 +33,14 @@ public class PostService {
         }
     }
 
-    public Page<PostDto> PostListForUser(Pageable pageable, User author, User currentUser) {
+    public Page<PostDto> postListForUser(Pageable pageable, User author, User currentUser) {
         return postRepo.findByAuthor(pageable, author, currentUser);
+    }
+
+    public void deletePost(User user, Post post) {
+        if(post.getAuthor().equals(user)) {
+            postRepo.delete(post);
+        }
+
     }
 }

@@ -36,6 +36,7 @@
     </div>
     <#if isCurrentUser>
         <#include "parts/postEdit.ftlh">
+        <#include "parts/postDelete.ftlh">
     </#if>
     <#include "parts/postList.ftlh">
 
