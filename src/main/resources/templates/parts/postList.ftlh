@@ -25,6 +25,10 @@
                         </#if>
                         ${post.likes}
                     </a>
+                    <a class="col align-self-center" data-toggle="modal" href="#collapsePostComments" data-target="#collapsePostComments" aria-expanded="false" aria-controls="collapsePostComments">
+                        <i class="fa fa-comments"></i>
+                    </a>
+             
                     <#if post.author.id == currentUserId>
                         <a class="col btn btn-primary" href = "/user-posts/${post.author.id}?post=${post.id}">
                             Edit
@@ -38,4 +42,5 @@
         No posts
     </#list>
 </div>
+<#include "postComments.ftlh">
 <@p.pager url page />
