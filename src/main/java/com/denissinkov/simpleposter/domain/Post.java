@@ -41,7 +41,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(String name, String text, User user) {
+    public Post(String text, User user) {
         this.author = user;
         this.text = text;
         this.status = PostStatus.NEW;

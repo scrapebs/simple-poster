@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 
 public interface PostRepo extends CrudRepository<Post, Long> {
     @Query("select new com.denissinkov.simpleposter.domain.dto.PostDto(" +

@@ -1,6 +1,18 @@
 <#include "security.ftlh">
 <#import "pager.ftlh" as p>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/static/js/postComment.js"></script>
+<script src="/static/js/getComments.js"></script>
+
+<script>
+    var currentPost;
+    function setCurrentPost(postId){
+        currentPost = postId;
+        ajaxGetComments();
+    }
+</script>
+
 
 <div class="card-columns" id="posts-list">
     <#list page.content as post>
@@ -25,10 +37,11 @@
                         </#if>
                         ${post.likes}
                     </a>
-                    <a class="col align-self-center" data-toggle="modal" href="#collapsePostComments" data-target="#collapsePostComments" aria-expanded="false" aria-controls="collapsePostComments">
+                    <a class="col align-self-center" data-toggle="modal" href="#collapsePostComments" id="comments"
+                       data-target="#collapsePostComments" aria-expanded="false" aria-controls="collapsePostComments"
+                       onclick="setCurrentPost(${post.id})">
                         <i class="fa fa-comments"></i>
                     </a>
-             
                     <#if post.author.id == currentUserId>
                         <a class="col btn btn-primary" href = "/user-posts/${post.author.id}?post=${post.id}">
                             Edit
@@ -42,5 +55,5 @@
         No posts
     </#list>
 </div>
-<#include "postComments.ftlh">
+<#include "comments.ftlh">
 <@p.pager url page />
