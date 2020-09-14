@@ -7,7 +7,7 @@
                 if (result.status == "success") {
                     $('#getCommentsDiv ul').empty();
                     $.each(result.data, function (i, comment) {
-                        var comment = "User: " + comment.author.username + ": " + comment.text + "<br>";
+                        var comment = comment.author.username + ": " + comment.text + "<br>";
                         $('#getCommentsDiv .list-group').append(comment)
                     });
                 } else {

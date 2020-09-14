@@ -7,6 +7,7 @@ import com.denissinkov.simpleposter.domain.dto.AjaxResponse;
 import com.denissinkov.simpleposter.domain.dto.CommentDto;
 import com.denissinkov.simpleposter.repos.CommentRepo;
 import com.denissinkov.simpleposter.repos.PostRepo;
+import com.denissinkov.simpleposter.service.AskCommentService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,11 +24,13 @@ public class CommentController {
 
     private CommentRepo commentRepo;
     private PostRepo postRepo;
+    private AskCommentService askCommentService;
 
     @Autowired
-    public CommentController(CommentRepo commentRepo, PostRepo postRepo) {
+    public CommentController(CommentRepo commentRepo, PostRepo postRepo, AskCommentService askCommentService) {
         this.commentRepo = commentRepo;
         this.postRepo = postRepo;
+        this.askCommentService = askCommentService;
     }
 
     @GetMapping(value = "/post/{post}/comments")
@@ -54,6 +57,15 @@ public class CommentController {
         commentRepo.save(comment);
         AjaxResponse response = new AjaxResponse("success", null);
         return response;
+    }
+
+    @PostMapping("/post/{post}/askComment")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity askComment(
+        @PathVariable Post post
+    ) {
+        askCommentService.askComment(post);
+        return ResponseEntity.ok("asked");
     }
 
 }
