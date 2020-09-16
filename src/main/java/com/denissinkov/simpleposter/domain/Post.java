@@ -1,6 +1,7 @@
 package com.denissinkov.simpleposter.domain;
 
 import com.denissinkov.simpleposter.domain.util.PostHelper;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Post {
     @Enumerated(EnumType.STRING)
     private PostStatus status;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "post_likes",

@@ -37,10 +37,12 @@ public class CommentController {
     public AjaxResponse getComments(
             @AuthenticationPrincipal User user,
             @PathVariable Post post
-            ) {
+    ) {
         List<Comment> comments = commentRepo.findByPost(post);
-        AjaxResponse ajaxResponse = new AjaxResponse("success", comments);
-        return ajaxResponse;
+        if (comments != null && comments.size() !=0)
+            return new AjaxResponse("success", comments);
+        else
+            return new AjaxResponse("not_found", comments);
 
     }
 

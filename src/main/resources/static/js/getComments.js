@@ -4,19 +4,19 @@
             type: 'GET',
             url: '/post/'+currentPost+'/comments',
             success: function (result) {
+                $("#getCommentsDiv ul").empty();
                 if (result.status == "success") {
-                    $('#getCommentsDiv ul').empty();
                     $.each(result.data, function (i, comment) {
                         var comment = comment.author.username + ": " + comment.text + "<br>";
                         $('#getCommentsDiv .list-group').append(comment)
                     });
                 } else {
-                    $("#getCommentsDiv").html("<strong>Error loading comments</strong>");
-                    console.log("Failed loading comments: ", result);
+                    $('#getCommentsDiv .list-group').append("No comments yet. Make the first one!")
                 }
             },
             error: function (е) {
-                $("#getResultDiv").html("<strong>Error loading comments</strong>");
+                $("#getCommentsDiv ul").empty();
+                $('#getCommentsDiv .list-group').append("Error loading comments")
                 console.log("ERROR: Unable to load comments", e);
             }
         });

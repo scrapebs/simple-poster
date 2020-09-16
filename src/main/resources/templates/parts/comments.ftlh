@@ -11,7 +11,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Comments</p>
                 <div id="getCommentsDiv">
                     <ul class="list-group">
                     </ul>
