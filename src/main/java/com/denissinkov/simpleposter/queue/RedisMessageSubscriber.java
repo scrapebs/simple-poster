@@ -20,6 +20,7 @@ public class RedisMessageSubscriber implements MessageListener {
         this.redisTemplate = redisTemplate;
     }
 
+    @Override
     public void onMessage(final Message message, final byte[] pattern) {
         logger.debug("Message was received");
 

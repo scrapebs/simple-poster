@@ -14,17 +14,11 @@ public class RedisMessagePublisher implements MessagePublisher{
 
     Logger logger = LoggerFactory.getLogger(RedisMessagePublisher.class);
 
-    @Autowired
     private RedisTemplate<String, Object> redisTemplate;
-
-    @Autowired
-    @Qualifier("topicSource")
     private ChannelTopic topic;
 
-    public RedisMessagePublisher() {
-    }
-
-    public RedisMessagePublisher(final RedisTemplate<String, Object> redisTemplate, final ChannelTopic topic) {
+    @Autowired
+    public RedisMessagePublisher(final RedisTemplate<String, Object> redisTemplate, @Qualifier("topicSource") final ChannelTopic topic) {
         this.redisTemplate = redisTemplate;
         this.topic = topic;
     }
