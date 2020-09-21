@@ -5,6 +5,7 @@ import com.denissinkov.simpleposter.domain.Post;
 import com.denissinkov.simpleposter.domain.User;
 import com.denissinkov.simpleposter.domain.dto.AjaxResponse;
 import com.denissinkov.simpleposter.domain.dto.CommentDto;
+import com.denissinkov.simpleposter.domain.dto.PostDto;
 import com.denissinkov.simpleposter.repos.CommentRepo;
 import com.denissinkov.simpleposter.repos.PostRepo;
 import com.denissinkov.simpleposter.service.AskCommentService;
@@ -63,11 +64,15 @@ public class CommentController {
 
     @PostMapping("/post/{post}/askComment")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity askComment(
+    public AjaxResponse askComment(
         @PathVariable Post post
     ) {
-        askCommentService.askComment(post);
-        return ResponseEntity.ok("asked");
+        try {
+            askCommentService.askComment(post);
+            return new AjaxResponse("success", null);
+        } catch (Exception e) {
+            return new AjaxResponse("error", null);
+        }
     }
 
 }

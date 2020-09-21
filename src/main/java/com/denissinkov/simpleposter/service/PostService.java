@@ -26,11 +26,12 @@ public class PostService {
     public Page<PostDto> postList(Pageable pageable, String filterUserName, User user) {
         if(filterUserName != null && !filterUserName.isEmpty() ) {
             User author = userRepo.findByUsername(filterUserName);
-            return postRepo.findByAuthor(pageable, author, user);
+            if(author!=null) {
+                return postRepo.findByAuthor(pageable, author, user);
+            }
         }
-        else {
-            return postRepo.findAll(pageable, user);
-        }
+
+        return postRepo.findAll(pageable, user);
     }
 
     public Page<PostDto> postListForUser(Pageable pageable, User author, User currentUser) {

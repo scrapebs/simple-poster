@@ -24,6 +24,9 @@ public class PostDto {
         this.meLiked = meLiked;
     }
 
+    public PostDto() {
+    }
+
     public String getAuthorName() {
         return PostHelper.getAuthorName(author);
     }

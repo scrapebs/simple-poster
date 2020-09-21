@@ -23,16 +23,19 @@ public class User implements UserDetails, Serializable {
     @NotBlank(message = "Username cannot be empty.")
     private String username;
 
+    @JsonIgnore
     @NotBlank(message = "Password cannot be empty")
     private String password;
 
     private boolean active;
 
+    @JsonIgnore
     @Email(message = "Invalid Email Address")
     @NotBlank(message = "Email address cannot be empty")
     private String email;
     private String activationCode;
 
+    @JsonIgnore
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)

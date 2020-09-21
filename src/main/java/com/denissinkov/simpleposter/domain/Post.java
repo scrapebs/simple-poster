@@ -21,6 +21,7 @@ public class Post {
     @Length(max = 2048, message = "Text is too long")
     private String text;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author")
     private User author;
@@ -49,6 +50,12 @@ public class Post {
         this.status = PostStatus.NEW;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+                "text='" + text + '\'' +
+                '}';
+    }
 
     public String getAuthorName() {
         return PostHelper.getAuthorName(author);

@@ -23,6 +23,7 @@ public class RedisMessageSubscriber implements MessageListener {
     @Override
     public void onMessage(final Message message, final byte[] pattern) {
         logger.debug("Message was received");
+        logger.debug(message.toString());
 
     }
 }
