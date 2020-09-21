@@ -1,5 +1,6 @@
 package com.denissinkov.simpleposter.queue;
 
+import com.denissinkov.simpleposter.service.ProcessRedisResponseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,12 @@ public class RedisMessageSubscriber implements MessageListener {
     Logger logger = LoggerFactory.getLogger(MessageListener.class);
 
     private RedisTemplate redisTemplate;
+    private ProcessRedisResponseService processRedisResponseService;
 
     @Autowired
-    public RedisMessageSubscriber(RedisTemplate redisTemplate) {
+    public RedisMessageSubscriber(RedisTemplate redisTemplate, ProcessRedisResponseService processRedisResponseService) {
         this.redisTemplate = redisTemplate;
+        this.processRedisResponseService = processRedisResponseService;
     }
 
     @Override
@@ -25,5 +28,6 @@ public class RedisMessageSubscriber implements MessageListener {
         logger.debug("Message was received");
         logger.debug(message.toString());
 
+        processRedisResponseService.processResponse(message.toString());
     }
 }
