@@ -16,7 +16,7 @@
             },
             error: function (е) {
                 $("#getCommentsDiv ul").empty();
-                $('#getCommentsDiv .list-group').append("Error loading comments")
+                $('#getCommentsDiv .list-group').append("Error loading comments!!")
                 console.log("ERROR: Unable to load comments", e);
             }
         });

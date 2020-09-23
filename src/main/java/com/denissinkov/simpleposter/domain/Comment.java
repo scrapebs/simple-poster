@@ -16,7 +16,7 @@ public class Comment {
     @Length(max = 1000, message = "Text is too long")
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "author")
     private User author;
 

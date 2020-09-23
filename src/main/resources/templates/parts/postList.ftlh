@@ -52,9 +52,10 @@
             </div>
 
         </div>
+        <#include "comments.ftlh">
     <#else>
         No posts
     </#list>
 </div>
-<#include "comments.ftlh">
+
 <@p.pager url page />

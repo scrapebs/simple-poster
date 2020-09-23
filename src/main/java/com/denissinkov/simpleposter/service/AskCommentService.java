@@ -12,7 +12,7 @@ public class AskCommentService {
     @Autowired
     RedisMessagePublisher redisMessagePublisher;
 
-    public void askComment(Post post) throws Exception{
+    public void askComment(Post post){
         redisMessagePublisher.publish(post);
     }
 }

@@ -1,5 +1,5 @@
 <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Post now
+    <#if post??>Post Edit<#else>Post Now</#if>
 </a>
 <div class="collapse <#if post??>show</#if>" id="collapseExample">
     <div class="form-group mt-3">
@@ -27,7 +27,9 @@
                         <button type="submit" class="btn btn-primary">Post</button>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalPostDelete">Delete</button>
+                        <#if post??>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalPostDelete">Delete</button>
+                        </#if>
                     </td>
                 </tr>
             </table>

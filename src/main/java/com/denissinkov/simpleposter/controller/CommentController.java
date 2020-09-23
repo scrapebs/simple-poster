@@ -65,12 +65,14 @@ public class CommentController {
     @PostMapping("/post/{post}/askComment")
     @ResponseStatus(HttpStatus.OK)
     public AjaxResponse askComment(
-        @PathVariable Post post
+        @PathVariable Post post,
+        @AuthenticationPrincipal User currentUser
     ) {
-        try {
+
+        if(currentUser.equals(post.getAuthor())){
             askCommentService.askComment(post);
             return new AjaxResponse("success", null);
-        } catch (Exception e) {
+        } else {
             return new AjaxResponse("error", null);
         }
     }

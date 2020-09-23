@@ -25,6 +25,7 @@ $(document).ready(function() {
             success: function (result) {
                 if (result.status == "success") {
                     alert("You asked us to leave a comment! Please check out the comments later!")
+
                 } else {
                     alert("Unfortunately you cant ask for a comment now. Please try a  bit later!")
                     console.log("ERROR: Unable to post a comment", e);

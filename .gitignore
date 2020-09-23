@@ -1,4 +1,6 @@
-/.git
-/.idea
+.idea
+*.iws
+*.iml
+*.ipr
+
 /target
-Simple Poster.iml
